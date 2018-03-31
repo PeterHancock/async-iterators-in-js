@@ -1,6 +1,7 @@
-name: agenda
-class: middle, center
-
+name: inverse
+layout: true
+class: middle, center, inverse
+---
 # Async Iteration in JavaScript
 
 ---
@@ -16,6 +17,7 @@ class: middle, center
 # Synchronous Iteration
 
 ---
+layout: false
 
 ```
 for (i of Iterable) {
@@ -26,40 +28,40 @@ for (i of Iterable) {
 [...Iterable]
 ```
 
-TODO when was spread etc introduced
-Examples of native Iterables
+Both introduced in ES6/ECMAScript 2015 and supported natively in modern browsers
+
+<a target="_blank" href="http://jsbin.com/fowojaloto/1/edit?js,console">demo</a>
+
+<!-- a class="jsbin-embed" href="http://jsbin.com/fowojaloto/1/embed?js,console">JS Bin on jsbin.com</a-->
 
 ---
 
-What is an Iterable?
+So what is an Iterable?
 
-An object with the property `[Symbol.iterator]` is an _Iterator_ return ing function
+An object with the property `[Symbol.iterator]` that is an _Iterator_ returning function
 
 ---
 
-OK, what is an Iterator
+## OK, what is an Iterator?
 
-'Interface'
-
+The minimal protocol is
 ```
 {
   next(nextValue) {
     return { value, done: boolean }
   }
-  \\ Optional
-  throw(err) {
-
-  }
-  \\ Optional
-  return() {
-
-  }
 }
 ```
 
+```
+[1, 2, 3][Symbol.iterator]().next() // { done: false, value: 1 }
+```
+
+<a target="_blank" href="http://jsbin.com/rajeniyoho/2/edit?js,console">run</a>
+
 ---
 
-Many Iterators are also Iterable!
+Many Iterators are also Iterables!
 
 Call iterator manually, e.g.
 `"abc"[Symbol.iterator]()`
@@ -155,27 +157,40 @@ const transform = R.compose(map(x => x * 2), map(x => x + 1))
 
 const transformedIterator = transform([1, 2, 3])
 ```
+---
+template: inverse
+
+# Part II
+
+# Asyncronous Operations
 
 ---
+layout: none
 
-Idea to represent iteration
+## callback hell
 
 ```
-[1, 2, 3] -> ... -> []
-[2, 3] 1 -> 2 -> 4 [4]
-[3] 2 -> 3 -> 6 [4, 6]
-[]  3 -> 4 -> 8 -> [4, 6, 8]
+fetch(url, (err, data) => {
+    fetch(anotherUrl, (err, data) => {
+       ...  
+    })
+})
+
 ```
 
-Transducers for obviating the nested iterators?
 
-## Async
+## Promise chaining
 
-callbck hell
+```
+fetch(url)
+  .then((data) => {
+    return fetch()
+  })
 
-Promise chaining
+```
+---
 
-(pre async/await)
+## Generators to the rescue
 
 ```
 function run(promises) {
@@ -204,6 +219,7 @@ run(function * fetchData() {
 async function fetchData() {
   const data = await fetch(url)
   console.log(data)
+  const moreData = await fetch(anotherUrl)
   return data
 }
 
@@ -229,7 +245,7 @@ Blocking queue
 
 [Proposal Async Iterators](https://github.com/tc39/proposal-async-iteration)
 [es6 spec](http://exploringjs.com/es6/ch_iteration.html#sec_iterability)
-
+[ES2018](http://2ality.com/2017/02/ecmascript-2018.html)
 ---
 
 [Slides powered by remark](https://remarkjs.com)
@@ -247,3 +263,16 @@ Image
 <p class="scrollbar">
   <image src="static/transform.svg"/>
 </p>
+
+---
+
+Idea to represent iteration
+
+```
+[1, 2, 3] -> ... -> []
+[2, 3] 1 -> 2 -> 4 [4]
+[3] 2 -> 3 -> 6 [4, 6]
+[]  3 -> 4 -> 8 -> [4, 6, 8]
+```
+
+Transducers for obviating the nested iterators?
