@@ -1,0 +1,58 @@
+"[...iterator]"->take 5: next()
+take 5->echo: next()
+echo->map\n square: next()
+map\n square->filter\n odd numbers: next()
+filter\n odd numbers->"Source Iterator\n(1, 2, 3, ...)": next()
+"Source Iterator\n(1, 2, 3, ...)"->filter\n odd numbers: yield 1
+filter\n odd numbers->map\n square: yield 1
+map\n square->echo: yield 1
+echo->take 5: yield 1
+take 5->"[...iterator]": yield 1
+Note left of "[...iterator]": Result\n (1, ...)
+"[...iterator]"->take 5: next()
+take 5->echo: next()
+echo->take 5: yield 1
+take 5->"[...iterator]": yield 1
+Note left of "[...iterator]": Result\n (1, 1, ...)
+"[...iterator]"->take 5: next()
+take 5->echo: next()
+echo->map\n square: next()
+map\n square->filter\n odd numbers: next()
+filter\n odd numbers->"Source Iterator\n(1, 2, 3, ...)": next()
+"Source Iterator\n(1, 2, 3, ...)"->filter\n odd numbers: yield 2
+filter\n odd numbers->"Source Iterator\n(1, 2, 3, ...)": next()
+"Source Iterator\n(1, 2, 3, ...)"->filter\n odd numbers: yield 3
+filter\n odd numbers->map\n square: yield 3
+map\n square->echo: yield 9
+echo->take 5: yield 9
+take 5->"[...iterator]": yield 9
+Note left of "[...iterator]": Result\n (1, 1, 9, ...)
+"[...iterator]"->take 5: next()
+take 5->echo: next()
+echo->take 5: yield 9
+take 5->"[...iterator]": yield 9
+Note left of "[...iterator]": Result\n (1, 1, 9, 9, ...)
+"[...iterator]"->take 5: next()
+take 5->echo: next()
+echo->map\n square: next()
+map\n square->filter\n odd numbers: next()
+filter\n odd numbers->"Source Iterator\n(1, 2, 3, ...)": next()
+"Source Iterator\n(1, 2, 3, ...)"->filter\n odd numbers: yield 4
+filter\n odd numbers->"Source Iterator\n(1, 2, 3, ...)": next()
+"Source Iterator\n(1, 2, 3, ...)"->filter\n odd numbers: yield 5
+filter\n odd numbers->map\n square: yield 5
+map\n square->echo: yield 25
+echo->take 5: yield 25
+take 5->"[...iterator]": yield 25
+Note left of "[...iterator]": Result\n (1, 1, 9, 9, 25, ...)
+"[...iterator]"->take 5: next()
+take 5->echo: return()
+echo->map\n square: return()
+map\n square->filter\n odd numbers: return()
+filter\n odd numbers->"Source Iterator\n(1, 2, 3, ...)": return()
+"Source Iterator\n(1, 2, 3, ...)"->filter\n odd numbers: done
+filter\n odd numbers->map\n square: done
+map\n square->echo: done
+echo->take 5: done
+take 5->"[...iterator]": done
+Note left of "[...iterator]": Result\n (1, 1, 9, 9, 25)

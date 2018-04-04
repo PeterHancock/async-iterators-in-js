@@ -16,7 +16,7 @@ template: inverse
 ## Part I - Synchronous iteration
 
 ### Consuming iterators
-#### `for of`
+#### `for...of`
 #### `[...]`
 
 ### Producing iterators
@@ -44,7 +44,7 @@ layout: false
 
 ## Consuming Iterables
 
-#### `for of`
+#### `for...of`
 
 ```
 for (item of Iterable) {
@@ -81,7 +81,11 @@ next: () => { done: boolean, value: any }
 
 ---
 
-Sequence diagram of simple for loop/ spread
+```
+...[1, 2]
+```
+
+.sequence[simple-array-iteration]
 
 ---
 
@@ -166,6 +170,27 @@ function* fibonacci(f0 = 1, f1 = 1) {
 .jsbin.corner.demo[kagitiy/2]
 
 ---
+```
+function* naturalNumbers() {
+  let i = 0
+  while (true) {
+    yield ++i
+  }
+}
+```
+
+```
+for (const n of naturalNumbers()) {
+  // do something
+  if (n > 1) break
+}
+```
+
+---
+
+.sequence[simple-generator-loop-break]
+
+---
 
 ## Transforming Iterators
 
@@ -191,15 +216,11 @@ const filter = (f) => function*(it) {
 }
 ```
 
-.jsbin.corner.demo[lafigaj/5]
+.jsbin.corner.demo[lafigaj/8]
 
 ---
 
-sequence diagram
-
-echo repeats each item from the delegate iterator
-
-take - takes the first n items
+.sequence[transform]
 
 ---
 
@@ -341,7 +362,7 @@ fetchData().then( json => /* ... */)
 
 ## Part I & II recap
 
-* `for of` and `[...]` syntactic forms consuming Iterables
+* `for...of` and `[...]` syntactic forms consuming Iterables
 
 * Iterables are defined by the Iterator creating function keyed to `Symbol.iterator`
 
@@ -386,7 +407,6 @@ Blocking queue
 
 ---
 
-
 ## References
 
 [Proposal Async Iterators](https://github.com/tc39/proposal-async-iteration)
@@ -404,14 +424,11 @@ Code
 
 ---
 
-Image
+Sequence SVG
 
-<p class="scrollbar">
-  <image src="static/transform.svg"/>
-</p>
+.sequence[transform]
 
 ---
-
 Idea to represent iteration
 
 ```

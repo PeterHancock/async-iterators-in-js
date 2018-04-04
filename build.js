@@ -8,6 +8,7 @@ const page = slidesMd => `
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="static/css/remark-custom-theme.css">
     <link rel="stylesheet" type="text/css" href="static/css/remark-custom-extra.css">
+    <link rel="stylesheet" type="text/css" href="static/css/svg-custom.css">
   </head>
   <body>
     <textarea id="source">
@@ -19,11 +20,15 @@ ${slidesMd}
     remark.create({
       highlightStyle: 'github',
       highlightLanguage: 'javascript',
-      highlightLines: true
+      highlightLines: true,
+      navigation: {
+        scroll: false
+      }
     })
   </script>
   <script src="static/js/jsbin-embed-4.1.3.min.js"></script>
   <script src="static/js/jsbin-links.js"></script>
+    <script src="static/js/sequence.js"></script>
   </body>
 </html>
 `;
