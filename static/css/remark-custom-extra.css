@@ -6,12 +6,12 @@
   padding: 5px 10px 10px 10px;
 }
 
-a.demo {
+.demo a {
   color: rgb(0, 150, 0);
   text-decoration: none;
 }
 
 .corner {
   float: right;
-  width: 20%;
+  width: 10%;
 }
