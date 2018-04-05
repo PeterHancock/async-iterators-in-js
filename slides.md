@@ -13,24 +13,24 @@ whoami
 ---
 template: inverse
 
-## Part I - Synchronous iteration
+## Part I - Synchronous Iteration
 
-### Consuming iterators
+### Consuming Iterables
 #### `for...of`
 #### `[...]`
 
-### Producing iterators
-####  The protocol
+### Producing Iterables
+####  The Protocol
 #### Generators
 
-## Part II - Asynchronous
+## Part II - Asynchronous Operations
 #### Callbacks and Promises
-#### Combining Generators and Promises for pseudo synchronous style
+#### Combining Generators and Promises for pseudo blocking style
 #### Async/await
 
 ---
 
-## PART III - Asynchronous iteration
+## PART III - Asynchronous Iteration
 
 ---
 template: inverse
@@ -111,21 +111,26 @@ const naturalNumbers = {
 
 ---
 
-* Iterables can represent infinite sequences
-* Iterables can lazily construct the next value
+### Iterables can model infinite sequences
+
+### Iterables can lazily construct the next values
 
 ---
 
 ## The Fibonacci sequence as an Iterable
 
-From the recursive definition `fn = fn-1 + fn-2` to an iterative process
+From the recursive definition to an iterative process
+
+* f<sub>1</sub>, f<sub>2</sub> = 1
+* f<sub>n</sub> = f<sub>n-1</sub> + f<sub>n-2</sub>
+
 
 ```
-function fibonacci(f0 = 1, f1 = 1) {
+function fibonacci() {
   return {
     [Symbol.iterator]: () => {
-      let x = f0
-      let y = f1
+      let x = 1
+      let y = 1
       return {
         next: () => {
           const value = x
@@ -142,7 +147,7 @@ function fibonacci(f0 = 1, f1 = 1) {
 }
 ```
 
-.jsbin.corner.demo[dewuvin/3]
+.jsbin.corner.demo[dewuvin/5]
 
 ---
 
@@ -151,9 +156,9 @@ function fibonacci(f0 = 1, f1 = 1) {
 > An ES2015 language feature to simplify the creation of iterables
 
 ```
-function* fibonacci(f0 = 1, f1 = 1) {
-  let x = f0
-  let y = f1
+function* fibonacci() {
+  let x = 1
+  let y = 1
 
   while(true) {
     yield x
@@ -163,32 +168,30 @@ function* fibonacci(f0 = 1, f1 = 1) {
 }
 
 ```
-* `function *`
+
+* `function*`
 * `yield`
 
 
-.jsbin.corner.demo[kagitiy/2]
-
----
-```
-function* naturalNumbers() {
-  let i = 0
-  while (true) {
-    yield ++i
-  }
-}
-```
-
-```
-for (const n of naturalNumbers()) {
-  // do something
-  if (n > 1) break
-}
-```
+.jsbin.corner.demo[kagitiy/4]
 
 ---
 
-.sequence[simple-generator-loop-break]
+.sequence[fibonacci-generator]
+
+---
+
+## Talking back to Generators
+
+### Passing in data with `next(value)`
+
+.jsbin.demo[nafajac/5]
+
+### Returning early with `return()`
+
+.jsbin.demo[nucicom/1]
+
+### Throwing with `throw(error)`
 
 ---
 
@@ -199,7 +202,7 @@ As with Arrays, transforms like `map`, `filter` can be used to build up interest
 Whilst the `Array` prototype includes such things, iterables/iterators do not
 
 ```
-const map = (f) => function*(it) {
+const map = (f) => function* (it) {
   for (i of it) {
     yield f(i)
   }
@@ -207,7 +210,7 @@ const map = (f) => function*(it) {
 ```
 
 ```
-const filter = (f) => function*(it) {
+const filter = (f) => function* (it) {
   for (i of it) {
     if (f(i)) {
       yield i
@@ -221,18 +224,6 @@ const filter = (f) => function*(it) {
 ---
 
 .sequence[transform]
-
----
-
-## Talking back to Generators
-
-### Passing in data with `next(data)`
-
-.jsbin.demo[nafajac/5]
-
-### Returning early with `return()`
-
-.jsbin.demo[nucicom/1]
 
 ---
 template: inverse
@@ -265,36 +256,35 @@ function request(url, callback) {
 Things get messy when callbacks invoke other async operations
 
 ```
-function getStuff (callback) {
+function getJson (callback) {
   request(url, (err, response) => {
-    getJson(response, (jsonErr, json) => {
-      callback(null, json)
+    getBody(response, (err, body) => {
+      callback(null, JSON.parse(body))
     }))
 })
 ```
 
-This style tightly interleaves the the calling of async functions with the handling of resolved data
+This style mixes up the calling of async functions with the handling of resolved data
 
 ---
 
 ## Promises
 
-> Represent future data
+>  Represents the eventual completion (or failure) of an asynchronous operation, and its resulting value.
 
-`Promise.then` is used to register handlers, and called once the data is available
-`Promise.catch` for handling errors
+`Promise.then` is called to register success and failure handlers which and called after the data has returned.
 
-Using Promise returning functions for async ops
+These days many async APIs are *Promise* returning functions
 
 ```
-function request(url): Promise<Result>
+function asyncOp(...args): Promise<Result>
 ```
 
-e.g.
+e.g. `fetch`
 ```
-request(url)
+fetch(url)
   .then((response) => {
-    return getJson(response)
+    return response.getJson()
   })
   .then((json) => /* do something with json */)
 
@@ -303,37 +293,39 @@ request(url)
 
 ## Generators and Promises
 
-If a blocking version `request` and `getJson` existed the code would look like
+If a blocking version `request` and `getBody` the code could look like
 
 ```
-const response = request(url)
-const json = getJson(response)
-// do something with json
-
+const response = fetch(url)
+const json = response.getJson()
 ```
 
-This clearly expresses the sequence of operations (but with the single thread blocked!)
+This would clearly expresses the sequence of operations (albeit by blocking the single thread!)
 
----
+How about
 
 ```
 function * () {
-  const response = yield request(url)
-  const json = yield getJson(response)
+  const response = yield fetch(url)
+  const json = yield response.getJson()
   return json
 }
 ```
 
-The iterating logic could call next on the iterator and once the yielded promise is resolved call next with the resolved value.
+What if iterating logic
+
+* Received the yielded promise by calling  `next()` on the iterator
+* Called `next(value)` with the resolved value
+* and repeated
 
 ---
 
-Libraries like [co](https://github.com/tj/co) do this iterating for us
+Libraries like [co](https://github.com/tj/co) do this loop for us, and with error handling etc
 
 ```
 co(function * () {
-  const response = yield request(url)
-  const json = yield getJson(response)
+  const response = yield fetch(url)
+  const json = yield response.getJson()
   return json
 })
   .then((json) => /* ... */)
@@ -342,12 +334,12 @@ co(function * () {
 
 ## Async/await
 
-Standardise this Generator/Promise use case
+Standardized syntax to simplify this Generator/Promise pattern
 
 ```
 async function fetchData() {
-  const response = await request(url)
-  const json = await getJson(response)
+  const response = await fetch(url)
+  const json = await response.getJson()
   return json
 }
 
@@ -356,7 +348,8 @@ fetchData().then( json => /* ... */)
 
 > Introduced in ES6/ECMAScript 2017 and supported natively in modern browsers
 
-.jsbin.corner.demo[yawuroq/2]
+<!-- .jsbin.corner.demo[yawuroq/5] -->
+.jsbin.corner.demo[macomok/1]
 
 ---
 
@@ -372,9 +365,9 @@ fetchData().then( json => /* ... */)
 
 * Async operations can be tamed with Promises
 
-* A blocking like control flow can be emulated with Generators and Promises
+* A blocking style control flow can be emulated with Generators and Promises
 
-* Async/Await brings this pattern to the spec with new syntactic forms
+* Async/Await brings this pattern to the language with new syntactic forms
 
 ---
 template: inverse
@@ -386,24 +379,91 @@ template: inverse
 ---
 layout: none
 
-
-Async iteration looks like
+`for-await-of`
 ```
-  for await (item of asyncIterable) {
-
+  for await (const item of asyncIterable) {
+     // use item
   }
 ```
 
-An Async Iterable imlements the protocol
+The Async Iterable protocol
 ```
 {
   [Symbol.asyncIterator]: () => ({
-    next: Promise<{ done: boolean, value: any }>
+    next: () => Promise<{ done: boolean, value: any }>
   })
 }
 ```
+Async Generators
+```
+async function * asyncGenerator () {
+  await
+  yield  
+}
+```
+
 ---
-Blocking queue
+
+## Example: A sequence of quantum random numbers
+
+The Australian National University provides a Quantum Random Numbers REST service
+```
+const getQuantumRandomNumber = async () => {
+  const response = await fetch('https://qrng.anu.edu.au/API/jsonI.php?length=1&type=uint8')
+  const { data: [qrn] } = await response.json()
+  return qrn
+}
+```
+
+Lets create an async sequence from this
+```
+async function* quantumRandomNumbers() {
+  while (true) {
+    yield await getQuantumRandomNumber()
+  }
+}
+```
+
+And consume it
+
+```
+for await (const qrn of quantumRandomNumbers()) {
+}
+```
+
+.jsbin.corner.demo[licefuj/2]
+---
+
+.sequence[async-random]
+
+---
+
+## Transforming async iterators
+
+```
+const map = (f) => async function* (it) {
+  for await (const i of it) {
+    yield f(i)
+  }
+}
+```
+
+```
+const filter = (f) => async function* (it) {
+  for await (const i of it) {
+    if (await f(i)) {
+      yield i
+    }
+  }
+}
+```
+
+---
+
+.sequence[async-random-transform]
+
+---
+[Slides powered by remark](https://remarkjs.com)
 
 ---
 
@@ -414,28 +474,10 @@ Blocking queue
 [ES2018](http://2ality.com/2017/02/ecmascript-2018.html)
 ---
 
-[Slides powered by remark](https://remarkjs.com)
+
 
 ---
 
 Code
 
 <a class="jsbin-embed" href="http://jsbin.com/vewedugato/embed?js,console"></a>
-
----
-
-Sequence SVG
-
-.sequence[transform]
-
----
-Idea to represent iteration
-
-```
-[1, 2, 3] -> ... -> []
-[2, 3] 1 -> 2 -> 4 [4]
-[3] 2 -> 3 -> 6 [4, 6]
-[]  3 -> 4 -> 8 -> [4, 6, 8]
-```
-
-Transducers for obviating the nested iterators?

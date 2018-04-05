@@ -1,0 +1,24 @@
+"for...of"->"Fibonacci Iterator": next()
+"Fibonacci Iterator"->"for...of": yield 1
+Note left of "for...of": Result\n (1, ...)
+"for...of"->"Fibonacci Iterator": next()
+"Fibonacci Iterator"->"for...of": yield 1
+Note left of "for...of": Result\n (1, 1, ...)
+"for...of"->"Fibonacci Iterator": next()
+"Fibonacci Iterator"->"for...of": yield 2
+Note left of "for...of": Result\n (1, 1, 2, ...)
+"for...of"->"Fibonacci Iterator": next()
+"Fibonacci Iterator"->"for...of": yield 3
+Note left of "for...of": Result\n (1, 1, 2, 3, ...)
+"for...of"->"Fibonacci Iterator": next()
+"Fibonacci Iterator"->"for...of": yield 5
+Note left of "for...of": Result\n (1, 1, 2, 3, 5, ...)
+"for...of"->"Fibonacci Iterator": next()
+"Fibonacci Iterator"->"for...of": yield 8
+Note left of "for...of": Result\n (1, 1, 2, 3, 5, 8, ...)
+"for...of"->"Fibonacci Iterator": next()
+"Fibonacci Iterator"->"for...of": yield 13
+Note left of "for...of": Result\n (1, 1, 2, 3, 5, 8, 13, ...)
+"for...of"->"Fibonacci Iterator": return()
+"Fibonacci Iterator"->"for...of": done
+Note left of "for...of": Result\n (1, 1, 2, 3, 5, 8, 13)

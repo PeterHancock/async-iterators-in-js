@@ -1,0 +1,64 @@
+"for-of-await"->take 5: next()
+take 5->map\n square: next()
+map\n square->filter\n odd numbers: next()
+filter\n odd numbers->"Quantum Random Numbers": next()
+"Quantum Random Numbers"-->>filter\n odd numbers: yield 112
+filter\n odd numbers->"Quantum Random Numbers": next()
+"Quantum Random Numbers"-->>filter\n odd numbers: yield 136
+filter\n odd numbers->"Quantum Random Numbers": next()
+"Quantum Random Numbers"-->>filter\n odd numbers: yield 240
+filter\n odd numbers->"Quantum Random Numbers": next()
+"Quantum Random Numbers"-->>filter\n odd numbers: yield 44
+filter\n odd numbers->"Quantum Random Numbers": next()
+"Quantum Random Numbers"-->>filter\n odd numbers: yield 103
+filter\n odd numbers-->>map\n square: yield 103
+map\n square-->>take 5: yield 10609
+take 5-->>"for-of-await": yield 10609
+Note left of "for-of-await": Result\n (10609, ...)
+"for-of-await"->take 5: next()
+take 5->map\n square: next()
+map\n square->filter\n odd numbers: next()
+filter\n odd numbers->"Quantum Random Numbers": next()
+"Quantum Random Numbers"-->>filter\n odd numbers: yield 179
+filter\n odd numbers-->>map\n square: yield 179
+map\n square-->>take 5: yield 32041
+take 5-->>"for-of-await": yield 32041
+Note left of "for-of-await": Result\n (10609, 32041, ...)
+"for-of-await"->take 5: next()
+take 5->map\n square: next()
+map\n square->filter\n odd numbers: next()
+filter\n odd numbers->"Quantum Random Numbers": next()
+"Quantum Random Numbers"-->>filter\n odd numbers: yield 163
+filter\n odd numbers-->>map\n square: yield 163
+map\n square-->>take 5: yield 26569
+take 5-->>"for-of-await": yield 26569
+Note left of "for-of-await": Result\n (10609, 32041, 26569, ...)
+"for-of-await"->take 5: next()
+take 5->map\n square: next()
+map\n square->filter\n odd numbers: next()
+filter\n odd numbers->"Quantum Random Numbers": next()
+"Quantum Random Numbers"-->>filter\n odd numbers: yield 114
+filter\n odd numbers->"Quantum Random Numbers": next()
+"Quantum Random Numbers"-->>filter\n odd numbers: yield 175
+filter\n odd numbers-->>map\n square: yield 175
+map\n square-->>take 5: yield 30625
+take 5-->>"for-of-await": yield 30625
+Note left of "for-of-await": Result\n (10609, 32041, 26569, 30625, ...)
+"for-of-await"->take 5: next()
+take 5->map\n square: next()
+map\n square->filter\n odd numbers: next()
+filter\n odd numbers->"Quantum Random Numbers": next()
+"Quantum Random Numbers"-->>filter\n odd numbers: yield 247
+filter\n odd numbers-->>map\n square: yield 247
+map\n square-->>take 5: yield 61009
+take 5-->>"for-of-await": yield 61009
+Note left of "for-of-await": Result\n (10609, 32041, 26569, 30625, 61009, ...)
+"for-of-await"->take 5: next()
+take 5->map\n square: return()
+map\n square->filter\n odd numbers: return()
+filter\n odd numbers->"Quantum Random Numbers": return()
+"Quantum Random Numbers"-->>filter\n odd numbers: done
+filter\n odd numbers-->>map\n square: done
+map\n square-->>take 5: done
+take 5-->>"for-of-await": done
+Note left of "for-of-await": Result\n (10609, 32041, 26569, 30625, 61009)

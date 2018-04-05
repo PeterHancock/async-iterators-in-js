@@ -1,0 +1,12 @@
+"for-await-of"->Quantum Random Numbers: next()
+Quantum Random Numbers-->>"for-await-of": yield 12
+Note left of "for-await-of": Result\n (12, ...)
+"for-await-of"->Quantum Random Numbers: next()
+Quantum Random Numbers-->>"for-await-of": yield 85
+Note left of "for-await-of": Result\n (12, 85, ...)
+"for-await-of"->Quantum Random Numbers: next()
+Quantum Random Numbers-->>"for-await-of": yield 144
+Note left of "for-await-of": Result\n (12, 85, 144, ...)
+"for-await-of"->Quantum Random Numbers: return()
+Quantum Random Numbers-->>"for-await-of": done
+Note left of "for-await-of": Result\n (12, 85, 144)
