@@ -27,20 +27,14 @@ template: inverse
 
 ## Part I - Synchronous Iteration
 
-### Consuming Iterables
-#### `for...of`
-#### `[...]`
+### Consuming Iterables - _for...of_  and  _[...]_
 
-### Producing Iterables
-####  The Protocol
-#### Generators
+### Producing Iterables - Protocol and Generators
 
 ## Part II - Asynchronous Operations
-#### Callbacks and Promises
-#### Combining Generators and Promises for pseudo blocking style
-#### Async/await
-
----
+### Callbacks and Promises
+### Combining Generators and Promises to emulate blocking
+### Async/await
 
 ## PART III - Asynchronous Iteration
 
@@ -80,13 +74,21 @@ Both introduced in ES6/ECMAScript 2015 and supported natively in modern browsers
 
 Any object with the property `[Symbol.iterator]` that is a function returning an _Iterator_
 
+```
+{
+  [Symbol.iterator]: () => Iterator
+}
+```
+
 ---
 
 ## OK, what is an _Iterator_?
 
-An object with the property
+An object with the property `name`
 ```
-next: () => { done: boolean, value: any }
+{
+  next: () => { done: boolean, value: any }
+}
 ```
 
 .jsbin.corner.demo[tuhicur/4]
@@ -129,7 +131,7 @@ const naturalNumbers = {
 
 ---
 
-## The Fibonacci sequence as an Iterable
+## The Fibonacci Sequence as an Iterable
 
 From the recursive definition to an iterative process
 
@@ -344,7 +346,7 @@ co(function * () {
 ```
 ---
 
-## Async/await
+## Async/Await
 
 Standardized syntax to simplify this Generator/Promise pattern
 
@@ -365,7 +367,7 @@ fetchData().then( json => /* ... */)
 
 ---
 
-## Part I & II recap
+## Part I & II Recap
 
 * `for...of` and `[...]` - syntactic forms consuming Iterables
 
@@ -398,7 +400,7 @@ layout: none
   }
 ```
 
-The Async Iterable protocol
+The Async Iterable Protocol
 ```
 {
   [Symbol.asyncIterator]: () => ({
@@ -419,7 +421,7 @@ async function * asyncGenerator () {
 
 ---
 
-## Example: A sequence of random numbers
+## Example: A Sequence of Random Numbers
 
 The Australian National University provides a Quantum Random Numbers REST service
 ```
@@ -454,7 +456,7 @@ for await (const qrn of quantumRandomNumbers()) {
 
 ---
 
-## Iterating over network streams
+## Iterating Over Network Streams
 
 > [ReadableStream](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream) part of the Streams API
 
@@ -479,7 +481,7 @@ async function* toAsyncIterator(url) {
 
 ---
 
-## Transforming async iterators
+## Transforming Async Iterators
 
 ```
 const map = (f) => async function* (it) {
@@ -501,52 +503,30 @@ const filter = (f) => async function* (it) {
 
 ---
 
-## Transforming async iterators
+## Transforming Async Iterators
 
 .sequence[async-random-transform]
 
 ---
 
-### A read-blocking queue
+## A Queue with Blocking Takes
 
-```
-function queue () {
-  const buf = []
-  {
-    put: (data) => buf.push(data)
-    [Symbol.asyncIterator]: ?
-  }
-}
-```
+.jsbin.demo[takohaz/7]
 
-```
-const q = queue()
-
-// writer
-setInterval(() => {
-  q.push
-  }, 100)
-
-// reader
-const reader = async () => {
-  for await (const i of q) {
-    // do something with
-    // sleep
-  }
-}
-```
+Queues are the concurrency primitive at the core of the Actor model (Erlang, Scala) and CSP (Communicating Sequential Processes) (Clojure's core.async)
 
 ---
+template: inverse
 
 # Thank you
 
-[Slides powered by remark](https://remarkjs.com)
+Slides powered by [remark](https://remarkjs.com)
 
 ---
 
 ## References
 
-* [Proposal Async Iterators](https://github.com/tc39/proposal-async-iteration)
+* [Async Iterators Proposal](https://github.com/tc39/proposal-async-iteration)
 * [ES2015 Iteration](http://exploringjs.com/es6/ch_iteration.html#sec_iterability)
 * [ES2018](http://2ality.com/2017/02/ecmascript-2018.html)
 * [Readable Streams](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream)
