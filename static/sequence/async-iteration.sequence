@@ -1,12 +1,12 @@
 for await->async iterable: next()
 async iterable-->>for await: yield 1
-Note left of for await: Result\n (1, ...)
+Note left of for await: 1, ...
 for await->async iterable: next()
 async iterable-->>for await: yield 2
-Note left of for await: Result\n (1, 2, ...)
+Note left of for await: 1, 2, ...
 for await->async iterable: next()
 async iterable-->>for await: yield 3
-Note left of for await: Result\n (1, 2, 3, ...)
+Note left of for await: 1, 2, 3, ...
 for await->async iterable: next()
 async iterable-->>for await: done
-Note left of for await: Result\n (1, 2, 3)
+Note left of for await: 1, 2, 3

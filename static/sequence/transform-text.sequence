@@ -1,0 +1,108 @@
+"[...iterator]"->take 5: next()
+take 5->map\n join words: next()
+map\n join words->split: next()
+split->"Source Iterator\n(1, 2, 3, ...)": next()
+"Source Iterator\n(1, 2, 3, ...)"->split: yield A
+split->"Source Iterator\n(1, 2, 3, ...)": next()
+"Source Iterator\n(1, 2, 3, ...)"->split: yield  
+split->map\n join words: yield A
+map\n join words->take 5: yield A
+take 5->"[...iterator]": yield A
+Note left of "[...iterator]": A, ...
+"[...iterator]"->take 5: next()
+take 5->map\n join words: next()
+map\n join words->split: next()
+split->"Source Iterator\n(1, 2, 3, ...)": next()
+"Source Iterator\n(1, 2, 3, ...)"->split: yield G
+split->"Source Iterator\n(1, 2, 3, ...)": next()
+"Source Iterator\n(1, 2, 3, ...)"->split: yield e
+split->"Source Iterator\n(1, 2, 3, ...)": next()
+"Source Iterator\n(1, 2, 3, ...)"->split: yield n
+split->"Source Iterator\n(1, 2, 3, ...)": next()
+"Source Iterator\n(1, 2, 3, ...)"->split: yield e
+split->"Source Iterator\n(1, 2, 3, ...)": next()
+"Source Iterator\n(1, 2, 3, ...)"->split: yield r
+split->"Source Iterator\n(1, 2, 3, ...)": next()
+"Source Iterator\n(1, 2, 3, ...)"->split: yield a
+split->"Source Iterator\n(1, 2, 3, ...)": next()
+"Source Iterator\n(1, 2, 3, ...)"->split: yield t
+split->"Source Iterator\n(1, 2, 3, ...)": next()
+"Source Iterator\n(1, 2, 3, ...)"->split: yield o
+split->"Source Iterator\n(1, 2, 3, ...)": next()
+"Source Iterator\n(1, 2, 3, ...)"->split: yield r
+split->"Source Iterator\n(1, 2, 3, ...)": next()
+"Source Iterator\n(1, 2, 3, ...)"->split: yield F
+split->"Source Iterator\n(1, 2, 3, ...)": next()
+"Source Iterator\n(1, 2, 3, ...)"->split: yield u
+split->"Source Iterator\n(1, 2, 3, ...)": next()
+"Source Iterator\n(1, 2, 3, ...)"->split: yield n
+split->"Source Iterator\n(1, 2, 3, ...)": next()
+"Source Iterator\n(1, 2, 3, ...)"->split: yield c
+split->"Source Iterator\n(1, 2, 3, ...)": next()
+"Source Iterator\n(1, 2, 3, ...)"->split: yield t
+split->"Source Iterator\n(1, 2, 3, ...)": next()
+"Source Iterator\n(1, 2, 3, ...)"->split: yield i
+split->"Source Iterator\n(1, 2, 3, ...)": next()
+"Source Iterator\n(1, 2, 3, ...)"->split: yield o
+split->"Source Iterator\n(1, 2, 3, ...)": next()
+"Source Iterator\n(1, 2, 3, ...)"->split: yield n
+split->"Source Iterator\n(1, 2, 3, ...)": next()
+"Source Iterator\n(1, 2, 3, ...)"->split: yield  
+split->map\n join words: yield G,e,n,e,r,a,t,o,r,F,u,n,c,t,i,o,n
+map\n join words->take 5: yield GeneratorFunction
+take 5->"[...iterator]": yield GeneratorFunction
+Note left of "[...iterator]": A, GeneratorFunction, ...
+"[...iterator]"->take 5: next()
+take 5->map\n join words: next()
+map\n join words->split: next()
+split->"Source Iterator\n(1, 2, 3, ...)": next()
+"Source Iterator\n(1, 2, 3, ...)"->split: yield i
+split->"Source Iterator\n(1, 2, 3, ...)": next()
+"Source Iterator\n(1, 2, 3, ...)"->split: yield s
+split->"Source Iterator\n(1, 2, 3, ...)": next()
+"Source Iterator\n(1, 2, 3, ...)"->split: yield  
+split->map\n join words: yield i,s
+map\n join words->take 5: yield is
+take 5->"[...iterator]": yield is
+Note left of "[...iterator]": A, GeneratorFunction, is, ...
+"[...iterator]"->take 5: next()
+take 5->map\n join words: next()
+map\n join words->split: next()
+split->"Source Iterator\n(1, 2, 3, ...)": next()
+"Source Iterator\n(1, 2, 3, ...)"->split: yield a
+split->"Source Iterator\n(1, 2, 3, ...)": next()
+"Source Iterator\n(1, 2, 3, ...)"->split: yield  
+split->map\n join words: yield a
+map\n join words->take 5: yield a
+take 5->"[...iterator]": yield a
+Note left of "[...iterator]": A, GeneratorFunction, is, a, ...
+"[...iterator]"->take 5: next()
+take 5->map\n join words: next()
+map\n join words->split: next()
+split->"Source Iterator\n(1, 2, 3, ...)": next()
+"Source Iterator\n(1, 2, 3, ...)"->split: yield s
+split->"Source Iterator\n(1, 2, 3, ...)": next()
+"Source Iterator\n(1, 2, 3, ...)"->split: yield p
+split->"Source Iterator\n(1, 2, 3, ...)": next()
+"Source Iterator\n(1, 2, 3, ...)"->split: yield e
+split->"Source Iterator\n(1, 2, 3, ...)": next()
+"Source Iterator\n(1, 2, 3, ...)"->split: yield c
+split->"Source Iterator\n(1, 2, 3, ...)": next()
+"Source Iterator\n(1, 2, 3, ...)"->split: yield i
+split->"Source Iterator\n(1, 2, 3, ...)": next()
+"Source Iterator\n(1, 2, 3, ...)"->split: yield a
+split->"Source Iterator\n(1, 2, 3, ...)": next()
+"Source Iterator\n(1, 2, 3, ...)"->split: yield l
+split->"Source Iterator\n(1, 2, 3, ...)": next()
+"Source Iterator\n(1, 2, 3, ...)"->split: yield  
+split->map\n join words: yield s,p,e,c,i,a,l
+map\n join words->take 5: yield special
+take 5->"[...iterator]": yield special
+Note left of "[...iterator]": A, GeneratorFunction, is, a, special, ...
+"[...iterator]"->take 5: next()
+take 5->map\n join words: return()
+map\n join words->split: return()
+split->map\n join words: done
+map\n join words->take 5: done
+take 5->"[...iterator]": done
+Note left of "[...iterator]": A, GeneratorFunction, is, a, special

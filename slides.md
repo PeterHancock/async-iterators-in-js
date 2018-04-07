@@ -252,13 +252,13 @@ function request(url, callback) {
 }
 ```
 ---
-## Callback hell
+## Callback Hell
 Things get messy when callbacks invoke other async operations
 
 ```
-function getJson (callback) {
-  request(url, (err, response) => {
-    getBody(response, (err, body) => {
+function getJson(callback) {
+  request(url, (error, response) => {
+    getBody(response, (error2, body) => {
       callback(null, JSON.parse(body))
     }))
 })
@@ -272,9 +272,9 @@ This style mixes up the calling of async functions with the handling of resolved
 
 >  Represents the eventual completion (or failure) of an asynchronous operation, and its resulting value.
 
-`Promise.then` is called to register success and failure handlers which and called after the data has returned.
+`Promise.then` is called to register success and failure handlers which and called after the operation has completed.
 
-These days many async APIs are *Promise* returning functions
+These days many APIs use *Promise* returning functions for async operations
 
 ```
 function asyncOp(...args): Promise<Result>
@@ -284,23 +284,23 @@ e.g. `fetch`
 ```
 fetch(url)
   .then((response) => {
+    // The response header is resolved before the body is streamed
     return response.getJson()
   })
-  .then((json) => /* do something with json */)
-
+  .then((data) => /* do something with json data */)
 ```
 ---
 
 ## Generators and Promises
 
-If a blocking version `request` and `getBody` the code could look like
+If a blocking version of `fetch` and `getJson` existed the code could look like
 
 ```
 const response = fetch(url)
 const json = response.getJson()
 ```
 
-This would clearly expresses the sequence of operations (albeit by blocking the single thread!)
+This clearly expresses the sequence of operations (albeit by blocking the single thread!)
 
 How about
 
@@ -316,11 +316,11 @@ What if iterating logic
 
 * Received the yielded promise by calling  `next()` on the iterator
 * Called `next(value)` with the resolved value
-* and repeated
+* Repeat
 
 ---
 
-Libraries like [co](https://github.com/tj/co) do this loop for us, and with error handling etc
+Libraries like [co](https://github.com/tj/co) do this looping, and with proper error handling, etc
 
 ```
 co(function * () {
@@ -355,13 +355,13 @@ fetchData().then( json => /* ... */)
 
 ## Part I & II recap
 
-* `for...of` and `[...]` syntactic forms consuming Iterables
+* `for...of` and `[...]` - syntactic forms consuming Iterables
 
-* Iterables are defined by the Iterator creating function keyed to `Symbol.iterator`
+* Iterables are objects with Iterator creating function keyed to `Symbol.iterator`
 
 * Iterables can represent infinite sequences and the items can be created lazily on demand
 
-* Generators provide a syntax to declaratively creating Iterables
+* Generators provide syntax for creating Iterables concisely
 
 * Async operations can be tamed with Promises
 
@@ -401,10 +401,13 @@ async function * asyncGenerator () {
   yield  
 }
 ```
+* Standardized in ES2018
+* Supported in the latest stables of modern browsers
+* Available in Node v8.10 with `--es_staging` flag
 
 ---
 
-## Example: A sequence of quantum random numbers
+## Example: A sequence of random numbers
 
 The Australian National University provides a Quantum Random Numbers REST service
 ```
@@ -428,6 +431,7 @@ And consume it
 
 ```
 for await (const qrn of quantumRandomNumbers()) {
+  console.log(qrn)
 }
 ```
 
@@ -435,6 +439,31 @@ for await (const qrn of quantumRandomNumbers()) {
 ---
 
 .sequence[async-random]
+
+---
+
+## Iterating over network streams
+
+> [ReadableStream](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream) part of the Streams API
+
+* Streaming data over the network avoids buffering the whole response body
+
+* fetch -  `response.body` is a `ReadableStream`
+
+```
+async function* toAsyncIterator(url) {
+  const response = await fetch(url)
+  const reader = response.body.getReader() // ReadableStream
+  let next = await reader.read()
+  // noprotect
+  while (!next.done) {
+    yield next.value
+    next = await reader.read()
+  }
+}
+```
+
+.jsbin.demo[fiqojuc/7]
 
 ---
 
@@ -460,24 +489,53 @@ const filter = (f) => async function* (it) {
 
 ---
 
+## Transforming async iterators
+
 .sequence[async-random-transform]
 
 ---
+
+### A read-blocking queue
+
+```
+function queue () {
+  const buf = []
+  {
+    put: (data) => buf.push(data)
+    [Symbol.asyncIterator]: ?
+  }
+}
+```
+
+```
+const q = queue()
+
+// writer
+setInterval(() => {
+  q.push
+  }, 100)
+
+// reader
+const reader = async () => {
+  for await (const i of q) {
+    // do something with
+    // sleep
+  }
+}
+
+```
+
+---
+
+# Thank you
+
 [Slides powered by remark](https://remarkjs.com)
 
 ---
 
 ## References
 
-[Proposal Async Iterators](https://github.com/tc39/proposal-async-iteration)
-[ES2015/ES6](http://exploringjs.com/es6/ch_iteration.html#sec_iterability)
-[ES2018](http://2ality.com/2017/02/ecmascript-2018.html)
----
-
-
-
----
-
-Code
-
-<a class="jsbin-embed" href="http://jsbin.com/vewedugato/embed?js,console"></a>
+* [Proposal Async Iterators](https://github.com/tc39/proposal-async-iteration)
+* [ES2015 Iteration](http://exploringjs.com/es6/ch_iteration.html#sec_iterability)
+* [ES2018](http://2ality.com/2017/02/ecmascript-2018.html)
+* [Readable Streams](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream)

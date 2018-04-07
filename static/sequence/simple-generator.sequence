@@ -1,15 +1,15 @@
 "...Iterable"->"Iterator": next()
 "Iterator"->"...Iterable": yield 1
-Note left of "...Iterable": Result\n (1, ...)
+Note left of "...Iterable": 1, ...
 "...Iterable"->"Iterator": next(2)
 "Iterator"->"...Iterable": yield 3
-Note left of "...Iterable": Result\n (1, 3, ...)
+Note left of "...Iterable": 1, 3, ...
 "...Iterable"->"Iterator": next(4)
 "Iterator"->"...Iterable": yield 5
-Note left of "...Iterable": Result\n (1, 3, 5, ...)
+Note left of "...Iterable": 1, 3, 5, ...
 "...Iterable"->"Iterator": return(6)
 "Iterator"->"...Iterable": done
-Note left of "...Iterable": Result\n (1, 3, 5)
+Note left of "...Iterable": 1, 3, 5
 "...Iterable"->"Iterator": next(7)
 "Iterator"->"...Iterable": done
-Note left of "...Iterable": Result\n (1, 3, 5)
+Note left of "...Iterable": 1, 3, 5

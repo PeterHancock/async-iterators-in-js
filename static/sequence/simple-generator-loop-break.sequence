@@ -1,9 +1,9 @@
 "for...of with break"->"(1, 2, 3, ...)": next()
 "(1, 2, 3, ...)"->"for...of with break": yield 1
-Note left of "for...of with break": Result\n (1, ...)
+Note left of "for...of with break": 1, ...
 "for...of with break"->"(1, 2, 3, ...)": next()
 "(1, 2, 3, ...)"->"for...of with break": yield 2
-Note left of "for...of with break": Result\n (1, 2, ...)
+Note left of "for...of with break": 1, 2, ...
 "for...of with break"->"(1, 2, 3, ...)": return()
 "(1, 2, 3, ...)"->"for...of with break": done
-Note left of "for...of with break": Result\n (1, 2)
+Note left of "for...of with break": 1, 2
