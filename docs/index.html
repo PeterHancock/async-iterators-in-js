@@ -1,4 +1,16 @@
 
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Async Iteration</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="static/css/remark-custom-theme.css">
+    <link rel="stylesheet" type="text/css" href="static/css/remark-custom-extra.css">
+    <link rel="stylesheet" type="text/css" href="static/css/svg-custom.css">
+  </head>
+  <body>
+    <textarea id="source">
+
 name: inverse
 layout: true
 class: middle, center, inverse
@@ -538,3 +550,22 @@ const reader = async () => {
 * [ES2015 Iteration](http://exploringjs.com/es6/ch_iteration.html#sec_iterability)
 * [ES2018](http://2ality.com/2017/02/ecmascript-2018.html)
 * [Readable Streams](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream)
+
+    </textarea>
+  <script src="static/js/remark-latest.min.js">
+  </script>
+  <script>
+    remark.create({
+      highlightStyle: 'github',
+      highlightLanguage: 'javascript',
+      highlightLines: true,
+      navigation: {
+        scroll: false
+      }
+    })
+  </script>
+  <script src="static/js/jsbin-embed-4.1.3.min.js"></script>
+  <script src="static/js/jsbin-links.js"></script>
+    <script src="static/js/sequence.js"></script>
+  </body>
+</html>

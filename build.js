@@ -35,4 +35,4 @@ ${slidesMd}
 
 const md = fs.readFileSync(process.argv[2])
 
-fs.writeFileSync("index.html", page(md))
+fs.writeFileSync("docs/index.html", page(md))
