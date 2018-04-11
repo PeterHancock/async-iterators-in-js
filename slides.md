@@ -391,9 +391,9 @@ layout: none
 
 `for-await-of`
 ```
-  for await (const item of asyncIterable) {
-     // use item
-  }
+for await (const item of asyncIterable) {
+   // use item
+}
 ```
 
 The Async Iterable Protocol
@@ -473,7 +473,7 @@ async function* toAsyncIterator(url) {
 }
 ```
 
-.jsbin.demo[fiqojuc/7]
+.jsbin.demo[fiqojuc/10]
 
 ---
 
