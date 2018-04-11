@@ -14,20 +14,24 @@ const page = slidesMd => `
     <textarea id="source">
 ${slidesMd}
     </textarea>
-  <script src="static/js/remark-latest.min.js">
-  </script>
-  <script>
-    remark.create({
-      highlightStyle: 'github',
-      highlightLanguage: 'javascript',
-      highlightLines: true,
-      navigation: {
-        scroll: false
-      }
-    })
-  </script>
-  <script src="static/js/jsbin-embed-4.1.3.min.js"></script>
-  <script src="static/js/jsbin-links.js"></script>
+    <script src="static/js/remark-latest.min.js">
+    </script>
+    <script>
+      remark.create({
+        highlightStyle: 'github',
+        highlightLanguage: 'javascript',
+        highlightLines: true,
+        navigation: {
+          scroll: false
+        }
+      })
+    </script>
+    <script src="static/js/jsbin-embed-4.1.3.min.js"></script>
+    <script>
+      window.techio = window.location.search.indexOf('techio') !== -1
+    </script>
+    <script src="static/js/jsbin-links.js"></script>
+    <script src="static/js/techio-links.js"></script>
     <script src="static/js/sequence.js"></script>
   </body>
 </html>

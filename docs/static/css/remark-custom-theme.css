@@ -18,10 +18,10 @@ h1, h2, h3 {
   bottom: 3em;
 }
 li p { line-height: 1.25em; }
-.red { color: #6c00fa; }
+.red { color: #b175ff; }
 .large { font-size: 2em; }
 a, a > code {
-  color: #6c00fa;
+  color: #b175ff;
   text-decoration: none;
 }
 code {

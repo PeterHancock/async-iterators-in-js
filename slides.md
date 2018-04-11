@@ -55,6 +55,7 @@ for (item of Iterable) {
 Both introduced in ES6/ECMAScript 2015 and supported natively in modern browsers
 
 .jsbin.corner.demo[repefax/3]
+.techio.corner.demo[YE3o2qH]
 
 ---
 
@@ -80,6 +81,8 @@ An object with the property `next`
 ```
 
 .jsbin.corner.demo[tuhicur/4]
+
+.techio.corner.demo[ziOwLbq]
 
 ---
 
@@ -110,6 +113,8 @@ const naturalNumbers = {
 ```
 
 .jsbin.corner.demo[wisotiw/3]
+
+.techio.corner.demo[5FbSTaT]
 
 ---
 
@@ -151,6 +156,8 @@ function fibonacci() {
 
 .jsbin.corner.demo[dewuvin/5]
 
+.techio.corner.demo[UBTJTXi]
+
 ---
 
 ## Generators
@@ -177,6 +184,8 @@ function* fibonacci() {
 
 .jsbin.corner.demo[kagitiy/4]
 
+.techio.corner.demo[vVgsfVs]
+
 ---
 
 .sequence[fibonacci-generator]
@@ -187,11 +196,10 @@ function* fibonacci() {
 
 ### Passing in data with `next(value)`
 
-.jsbin.demo[nafajac/5]
+.jsbin.demo[nafajac/6]
+.techio.demo[ilnHTiX]
 
 ### Returning early with `return()`
-
-.jsbin.demo[nucicom/1]
 
 ### Throwing with `throw(error)`
 
@@ -222,6 +230,7 @@ const filter = (f) => function* (it) {
 ```
 
 .jsbin.corner.demo[lafigaj/8]
+.techio.corner.demo[WDpqAn1]
 
 <!-- ---
 .sequence[transform]
@@ -350,8 +359,7 @@ fetchData().then( json => /* ... */)
 
 > Introduced in ES2017 and supported natively in modern browsers
 
-<!-- .jsbin.corner.demo[yawuroq/5] -->
-.jsbin.corner.demo[macomok/1]
+.jsbin.corner.demo[sipozuf/1]
 
 ---
 
@@ -437,7 +445,7 @@ for await (const randomNumber of quantumRandomNumbers()) {
 }
 ```
 
-.jsbin.corner.demo[licefuj/2]
+.jsbin.corner.demo[licefuj/5]
 
 <!-- ---
 .sequence[async-random]
