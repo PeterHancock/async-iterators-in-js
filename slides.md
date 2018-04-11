@@ -93,7 +93,7 @@ An object with the property `next`
 
 ## Custom Iterables
 
-### The Natural Numbers
+#### The Natural Numbers
 
 ```
 const naturalNumbers = {
@@ -415,8 +415,8 @@ The Australian National University provides a Quantum Random Numbers REST servic
 ```
 const getQuantumRandomNumber = async () => {
   const response = await fetch('https://qrng.anu.edu.au/API/jsonI.php?length=1&type=uint8')
-  const { data: [qrn] } = await response.json()
-  return qrn
+  const json = await response.json()
+  return json.data[0]
 }
 ```
 
@@ -432,8 +432,8 @@ async function* quantumRandomNumbers() {
 And consume it
 
 ```
-for await (const qrn of quantumRandomNumbers()) {
-  console.log(qrn)
+for await (const randomNumber of quantumRandomNumbers()) {
+  console.log(randomNumber)
 }
 ```
 
