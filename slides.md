@@ -155,7 +155,7 @@ function fibonacci() {
 
 ## Generators
 
-> An ES2015 language feature to simplify the creation of iterables
+> An ES2015 language feature to simplify the creation of Iterables
 
 ```
 function* fibonacci() {
@@ -223,9 +223,9 @@ const filter = (f) => function* (it) {
 
 .jsbin.corner.demo[lafigaj/8]
 
----
-
+<!-- ---
 .sequence[transform]
+-->
 
 ---
 template: inverse
@@ -314,7 +314,7 @@ function * () {
 }
 ```
 
-What if iterating logic
+What if iterating logic looked like?:
 
 * Received the yielded promise by calling  `next()` on the iterator
 * Called `next(value)` with the resolved value
@@ -348,7 +348,7 @@ async function fetchData() {
 fetchData().then( json => /* ... */)
 ```
 
-> Introduced in ES6/ECMAScript 2017 and supported natively in modern browsers
+> Introduced in ES2017 and supported natively in modern browsers
 
 <!-- .jsbin.corner.demo[yawuroq/5] -->
 .jsbin.corner.demo[macomok/1]
@@ -409,7 +409,7 @@ async function * asyncGenerator () {
 
 ---
 
-## Example: A Sequence of Random Numbers
+## A Sequence of Random Numbers
 
 The Australian National University provides a Quantum Random Numbers REST service
 ```
@@ -438,10 +438,10 @@ for await (const qrn of quantumRandomNumbers()) {
 ```
 
 .jsbin.corner.demo[licefuj/2]
----
 
+<!-- ---
 .sequence[async-random]
-
+-->
 ---
 
 ## Iterating Over Network Streams
@@ -495,13 +495,13 @@ const filter = (f) => async function* (it) {
 
 .sequence[async-random-transform]
 
----
-
+<!-- ---
 ## A Queue with Blocking Takes
 
 .jsbin.demo[takohaz/7]
 
 Queues are the concurrency primitive at the core of the Actor model (Erlang, Scala) and CSP (Communicating Sequential Processes) (Clojure's core.async)
+-->
 
 ---
 template: inverse
@@ -510,7 +510,7 @@ template: inverse
 
 Slides powered by [remark](https://remarkjs.com)
 
----
+<!-- ---
 
 ## References
 
@@ -518,3 +518,4 @@ Slides powered by [remark](https://remarkjs.com)
 * [ES2015 Iteration](http://exploringjs.com/es6/ch_iteration.html#sec_iterability)
 * [ES2018](http://2ality.com/2017/02/ecmascript-2018.html)
 * [Readable Streams](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream)
+-->
