@@ -54,7 +54,7 @@ for (item of Iterable) {
 
 Both introduced in ES6/ECMAScript 2015 and supported natively in modern browsers
 
-.jsbin.corner.demo[repefax/3]
+.jsbin.corner.demo[repefax/6]
 .techio.corner.demo[YE3o2qH]
 
 ---
@@ -229,7 +229,7 @@ const filter = (f) => function* (it) {
 }
 ```
 
-.jsbin.corner.demo[lafigaj/8]
+.jsbin.corner.demo[lafigaj/12]
 .techio.corner.demo[WDpqAn1]
 
 <!-- ---
