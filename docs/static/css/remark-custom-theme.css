@@ -4,12 +4,14 @@
 
 body {
   font-family: 'Droid Serif';
+
 }
 h1, h2, h3 {
   font-family: 'Yanone Kaffeesatz';
   font-weight: 400;
   margin-bottom: 0;
 }
+
 .remark-slide-content h1 { font-size: 3em; }
 .remark-slide-content h2 { font-size: 2em; }
 .remark-slide-content h3 { font-size: 1.6em; }
@@ -50,7 +52,7 @@ code {
 }
 .inverse {
   background: #272822;
-  color: #777872;
+  color: #afafaf;
   text-shadow: 0 0 20px #333;
 }
 .inverse h1, .inverse h2 {

@@ -8,7 +8,7 @@ class: middle, center, inverse
 
 ---
 
-whoami
+# whoami
 
 ---
 template: inverse

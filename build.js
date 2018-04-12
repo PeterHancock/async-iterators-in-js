@@ -18,6 +18,7 @@ ${slidesMd}
     </script>
     <script>
       remark.create({
+        ratio: '16:9',
         highlightStyle: 'github',
         highlightLanguage: 'javascript',
         highlightLines: true,
